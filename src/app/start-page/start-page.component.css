@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css?family=Miss+Fajardose&subset=latin-ext');
+@import url('https://fonts.googleapis.com/css?family=Righteous&subset=latin-ext');
+
+body, html {
+    height: 100%;
+
+  }
+  
+.container-fluid{
+
+    background-image:url(../../assets/images/back.jpg);
+    height: 110vh; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color:white;
+    
+
+}
+
+.heading
+{
+    padding-top:18px;
+    
+    color:white;
+}
+
+
+li{
+
+
+    list-style-type:none;
+    margin-left:25px;
+    margin-bottom:10px;
+    font-weight:bold;
+}
+
+
+.foot{
+    font-family: 'Miss Fajardose', cursive;
+    letter-spacing: 8px;
+    font-size:50px;
+    
+}
+
+.icon{
+    margin-right:7px;
+    color:white;
+}
+.icon1{
+    margin-right:7px;
+    color:#67b826;
+}
+
+.wel{
+     margin-left:40px;
+     font-family: 'Righteous', cursive;
+}
+
+.btn-block{
+    
+    padding:10px;
+    border-radius:30px;
+}
+
+@media (max-width:456px){
+
+    .wel{
+
+        font-size:30px;
+        margin-left:60px;
+    }
+}
+
+@media(max-width:434px){
+
+    .wel{
+
+        margin-left:10px;
+    }
+
+    ul{
+        margin-left:-10px;
+    }
+}

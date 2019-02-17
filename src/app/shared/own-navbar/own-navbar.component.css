@@ -1,0 +1,17 @@
+.color-me{
+    font-weight:bold;
+    background-color:#48CDC8;
+}
+
+.logout{
+    
+    color:white;
+    font-size:30px;
+    margin-right:10px;
+    transition:.2s ease-in;
+}
+
+.logout:hover{
+
+    color:#dc3545;
+}

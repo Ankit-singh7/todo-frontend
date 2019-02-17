@@ -1,0 +1,34 @@
+
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="#"><i class="fab fa-audible icon" style="color:white;margin-left:7px"></i><span style="color:white;margin-left:7px"><b>Trego</b></span></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    
+      <div class="collapse navbar-collapse" id="navbarToggler">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+          <li class="nav-item " [ngClass]="{'active':activeNav === 'own'}">
+            <a class="nav-link" [routerLink]="['/single-user']"  >Home </a>
+          </li>
+          <li class="nav-item" [ngClass]="{'active':activeNav === 'other'}">
+            <a class="nav-link" [routerLink]="['/multi-user']" >Friend's Dashboard</a>
+          </li>
+          <li class="nav-item" [ngClass]="{'active':activeNav === 'friends'}">
+            <a class="nav-link" [routerLink]="['/friend-list']" >Friends</a>
+          </li>
+  
+        </ul>
+  
+        <form class="form-inline my-2 my-lg-0">
+          
+          
+          <div class="btn-group" role="group" style="float: right;" matTooltip="Logout">          
+            <a    (click)="logoutFunction()">
+                <i class="fas fa-power-off logout"></i>
+            </a>
+          </div>
+        </form>
+  
+      </div>
+  </nav>

@@ -1,0 +1,67 @@
+
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-12  text-left ">
+           <h4 class="heading animated fadeInLeft "><i class="fab fa-audible icon"></i><span>Trego</span></h4>
+        </div>
+    </div>
+    <br><br>
+
+  
+
+    <div class="row p-0 m-0">
+
+        <div class="col-sm-2"></div>
+      
+          <div class="col-sm-8 p-5 form-div animated bounceInDown" >
+
+             <h5 class="form-signin-heading">Change your password.</h5>
+             <br>
+
+
+        <form id="registerform" class="form-horizontal" role="form" #resetForm="ngForm">
+
+
+
+
+            <div class="row">
+
+                <div class="col-sm-12 col-md-6">
+                  <input type="password"  style="color:black"  id="Password" class="form-control" name="pass" [(ngModel)]="password" #pass="ngModel" [class.has-error]="pass.invalid && pass.touched" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"  required>
+                  <label>Password</label>
+                  <span class="block float-right"  *ngIf="pass.errors?.required && pass.touched ">Password is required!</span>
+                  <span class="block float-right"  *ngIf="pass.errors?.pattern">Password must contain atleast one number,one upper and lowercase letter and atleast 8 characters!</span>
+                </div>
+
+                <div class="col-sm-12 col-md-6">
+                <input type="password" id="confirmPassword"  style="color:black"  class="form-control" name="re-pass"  [(ngModel)]="confirmPassword" #repass="ngModel" [class.has-error]="repass.invalid && repass.touched"  required>
+                <label>Confirm Password</label>
+                <span class="block float-right"  *ngIf="repass.errors?.required && repass.touched ">confirm password is required!</span>
+                <span class="block float-right"  *ngIf="password!=confirmPassword"> password do not match!</span>
+                </div>
+              </div>
+
+  
+
+      
+    
+         
+        <br>
+        <br>
+            
+        
+         
+          <button class="btn btn-lg btn-dark btn-block" type="button" (click)="updatePasswordFunction()" [disabled]="!resetForm.valid">Change Password</button>
+          <br>
+          <br>
+      </form>
+          
+          <a  [routerLink]="['/login']"  style="color:white" ><b>Sign in Instead</b></a>
+      
+        </div>
+      
+        <div class="col-sm-2"></div>
+</div>
+
+</div> 

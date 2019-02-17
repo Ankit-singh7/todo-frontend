@@ -1,0 +1,140 @@
+
+<div class="">
+  <div>
+    <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" id="friends-tab" data-toggle="tab" href="#friendsTab" role="tab" aria-controls="intro"
+          aria-selected="true" style="color:#7d7d7d"><b>Freinds</b></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="sent-tab" data-toggle="tab" href="#sentTab" role="tab" aria-controls="other"
+          aria-selected="false" style="color:#7d7d7d"><b>Sent</b></a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" id="requests-tab" data-toggle="tab" href="#requestsTab" role="tab" aria-controls="other"
+          aria-selected="false" style="color:#7d7d7d"><b>Requests</b></a>
+      </li>
+
+    </ul> <!-- End nav-tabs-->
+    
+    <div class="tab-content" id="myTabContent"> 
+
+      <div class="tab-pane fade show active" id="friendsTab" role="tabpanel" aria-labelledby="friends-tab">
+        <div class="" *ngFor="let user of allUsers">
+          <div class="card border border-top-0">
+            <div class="card-body text-info">
+              <div class="row">
+                <div class="col-7">
+                  <h6 class="card-title">
+                      <span *ngIf = "user.status == 'online'"><i class="online"></i></span>
+                      <span *ngIf = "user.status != 'online'"><i class="offline"></i></span>
+      
+                    {{user.firstName}} {{user.lastName}}
+                  </h6>
+                  <p class="card-text" *ngIf="user.friends.length"> <i class="fas fa-users"></i>
+                    {{user.friends.length}} Friends </p>
+                </div>
+                <div class="col-5">
+                  <span *ngIf="!user.connected">
+                    <button class="btn btn-outline-info" type="button" (click)="selectUserToSentRequst(user)">
+                      <i class="fas fa-user-plus"></i>
+                      Connect
+                    </button>
+
+
+                  </span>
+                  <span *ngIf="user.connected">
+
+                    <button id="btnGroupDropFrActions" type="button" class="btn btn-outline-success" data-toggle="dropdown"
+                      aria-haspopup="true" aria-expanded="false">
+                      <i class="fas fa-check"></i>Friends
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDropFrActions">
+                      <a class="dropdown-item" (click)="selectUserToUnfriend(user)">Unfriend</a>
+                    </div>
+
+                  </span>
+
+                </div>
+              </div> <!-- End row-friends-->
+
+
+            </div> <!-- End cardbody-friends-->
+          </div> <!-- End card-friends-->
+
+        </div> <!-- border div-->
+      </div><!-- End tab-pane-friends-->
+
+      <div class="tab-pane fade" id="sentTab" role="tabpanel" aria-labelledby="sent-tab">
+        <div class="alert alert-info" role="alert" *ngIf="requestSents.length == 0">
+          <span>
+            No request sent yet!
+          </span>
+        </div>
+
+        <div class="" *ngFor="let sentReq of requestSents">
+          <div class="card border border-top-0">
+            <div class="card-body text-info">
+              <div class="row">
+                <div class="col-7">
+                  <h6 class="card-title"> {{sentReq.friendName}}</h6>
+                </div>
+                <div class="col-5">
+
+                  <button class="btn btn-outline-info" type="button" (click)="selectUserToCancelRequst(sentReq)">
+                    Cancel</button>
+
+                </div>
+              </div> <!-- End row-sent-->
+
+
+            </div> <!-- End cardbody-sent-->
+          </div> <!-- End card-sent-->
+
+        </div> <!-- border div-->
+
+
+      </div> <!-- End tab-pane-sent -->
+
+
+      <div class="tab-pane fade" id="requestsTab" role="tabpanel" aria-labelledby="requests-tab">
+
+        <div class="alert alert-info" role="alert" *ngIf="requestRecieved.length == 0">
+          No request recieved!
+        </div>
+
+        <div class="" *ngFor="let recievedReq of requestRecieved">
+          <div class="card border border-top-0">
+            <div class="card-body text-info">
+              <div class="row">
+                <div class="col-7">
+                  <h6 class="card-title">{{recievedReq.friendName}} </h6>
+                </div>
+                <div class="col-5">
+                  <button id="btnGroupDropActions" type="button" class="btn btn-outline-info" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    Actions
+                  </button>
+                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDropActions">
+                    <a class="dropdown-item" (click)="selectUserToAcceptRequst(recievedReq)">Confirm</a>
+                    <a class="dropdown-item" (click)="selectUserToRejectRequst(recievedReq)">Delete Request</a>
+
+                  </div>
+
+                </div>
+              </div> <!-- End row-requests-->
+
+            </div> <!-- End cardbody-requests-->
+          </div> <!-- End card-requests-->
+
+        </div> <!-- border div-->
+
+
+      </div> <!-- End tab-pane-requests -->
+
+    </div> <!-- End inner tab-content-->
+
+  </div>
+
+</div>

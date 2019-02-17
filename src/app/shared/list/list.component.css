@@ -1,0 +1,78 @@
+
+
+.list-container {
+    height: 78vh;
+    width:100%;
+  }
+  
+  
+  .list-sidenav-content {
+      height: 100%;
+      background-color: #ffffff;
+    }
+      
+    .list-sidenav {
+      width: 30vw;
+      background-color: #EDF5E1;
+    }
+    
+    .nav .nav-item :hover{
+      background-color: #ffffff;
+    }
+    
+    .taskList{
+      margin-left: 2em;
+    }
+    
+    .taskList:hover{
+      background-color: #F4F4F4;
+    }
+    
+    .markDone{
+      color:green;
+    }
+    
+    .strikethrough {
+      text-decoration: line-through;
+    }
+    
+    h4,i{
+      color:#E27D60;
+      
+    }
+  
+    .box{
+      border-bottom:1px solid grey;
+  }  
+
+  .box-1{
+    border:1px solid grey;
+}  
+    
+  /* Media Query for 320px - 454px Devices*/
+  
+  @media only screen and (min-width:300px) and (max-width:454px){
+    .list-sidenav {
+      width: 80vw;
+    }
+  
+  }
+  
+  /* Media Query for 455px - 768px Devices*/
+  
+  @media only screen and (min-width:455px) and (max-width:768px) {
+    .list-sidenav {
+      width: 50vw;
+    }
+   
+  }
+
+  .button1{
+
+    margin-left:15px;
+    background:transparent;
+    color:#7d7d7d;
+    font-weight:bold;
+    border-radius:15px;
+    border:2px solid #E27D60;
+  }

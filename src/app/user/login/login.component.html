@@ -1,0 +1,60 @@
+
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-12  text-left ">
+           <h4 class="heading animated fadeInLeft "><i class="fab fa-audible icon"></i><span>Trego</span></h4>
+        </div>
+    </div>
+    <br><br>
+
+    <div class="row p-0 m-0">
+
+        <div class="col-sm"></div>
+      
+        <div class="col-sm p-5 form-div animated bounceInDown " >
+
+
+      
+          <p class="form-signin-heading ">Let's explore</p>
+          <br>
+      
+  <form id="loginform" class="form-horizontal" role="form" #loginForm="ngForm" ng-app="show_hide_password" ng-controller="show_hide_password_controller">
+  
+      
+    <div class="form-group">
+  
+        <input type="email" id="inputEmail" style="color:black" [class.has-error]="mail.invalid && mail.touched " pattern="[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" class="form-control" name="email" [(ngModel)]="email" #mail="ngModel" required >
+        
+        <label  >Email</label>
+        
+        <span class=" block float-right" *ngIf="mail.errors?.required && mail.touched">Email is required!</span>
+        <span class="block float-right"  *ngIf="mail.errors?.pattern">Email is invalid!</span>
+      </div>
+
+       <div class="form-group">
+          <a (click)="togglePassword()"  id="btn"> <i class="far fa-eye pass"   id="eye" ></i></a>
+        <input [type]="passwordType" id="pwd" style="color:black"  [class.has-error]="pass.invalid && pass.touched"  class="form-control" name="password" [(ngModel)]="password" #pass="ngModel" required>
+        
+  
+        <label  >Password</label>
+        
+        <span class="block float-right" *ngIf="pass.errors?.required && pass.touched">Password is required!</span>
+        </div>
+       
+        
+        <a  [routerLink]="['/forgot-pass']"  style="color:white ;float:right">forgot password?</a><br>
+        <button class="btn btn-lg btn-dark btn-block" type="button" (click)="signInFunction()" [disabled]="!loginForm.valid">Sign in</button>
+ </form>
+       <br>
+       <br>
+        <a  [routerLink]="['/register']"  style="color:white" ><b>Don't have an account ?</b></a>
+      </div>
+      
+        <div class="col-sm"></div>
+</div>
+
+
+
+
+</div> 

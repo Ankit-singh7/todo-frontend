@@ -1,0 +1,119 @@
+
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-12  text-left ">
+           <h4 class="heading animated fadeInLeft "><i class="fab fa-audible icon"></i><span>Trego</span></h4>
+        </div>
+    </div>
+    <br><br>
+
+  
+
+    <div class="row p-0 m-0">
+
+        <div class="col-sm-2"></div>
+      
+          <div class="col-sm-8 p-5 form-div animated bounceInDown" >
+
+             <p class="form-signin-heading">Sign up for free</p>
+             <br>
+
+
+        <form id="registerform" class="form-horizontal" role="form" #registerForm="ngForm">
+
+           <div class="row">
+
+               <div class="col-sm-12 col-md-6">
+                    <input type="text" id="firstName" style="color:black" class="form-control" name="firstName" [class.has-error]="first.invalid && first.touched" pattern="^[a-zA-Z '.-]*$" minlength="3" [(ngModel)]="firstName" #first="ngModel"  required >
+                    <label  >First Name</label>
+        
+                    <span class=" block float-right" *ngIf="first.errors?.required && first.touched">first name is required!</span>
+                    <span class="block float-right"  *ngIf="first.errors?.pattern">name should contain only letters!</span>
+                    <span class="block float-right"  *ngIf="first.errors?.minlength">Minimum 3 letters required!</span>
+               </div>
+
+               <div class="col-sm-12 col-md-6">
+                    <input type="text" id="lastName" class="form-control"  style="color:black"  name="lastName" [class.has-error]="second.invalid && second.touched" pattern="^[a-zA-Z '.-]*$" minlength="3"  [(ngModel)]="lastName" #second="ngModel"  required >
+                    <label>Last Name</label>
+                    <span class=" block  float-right" *ngIf="second.errors?.required && second.touched">second name is required!</span>
+                    <span class="block  float-right"  *ngIf="second.errors?.pattern">name should contain only letters!</span>
+                    <span class="block  float-right"  *ngIf="second.errors?.minlength">Minimum 3 letters required!</span>
+               </div>
+
+          </div>
+
+        <br>
+          
+         <input type="email" id="inputEmail"  style="color:black" pattern="[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" [class.has-error]="mail.invalid && mail.touched"  class="form-control" name="email" [(ngModel)]="email" #mail="ngModel" required >
+         <label>Email</label>
+         <span class=" block  float-right" *ngIf="mail.errors?.required && mail.touched">Email is required!</span>
+         <span class="block  float-right"  *ngIf="mail.errors?.pattern">Email is invalid!</span>
+       <br>
+      
+    <div class="row">
+
+          <div class="col-sm-12 col-md-6">
+                  <input type="password"  style="color:black"  id="Password" class="form-control" name="pass" [(ngModel)]="password" #pass="ngModel" [class.has-error]="pass.invalid && pass.touched" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"  required>
+                  <label>Password</label>
+                  <span class="block float-right"  *ngIf="pass.errors?.required && pass.touched ">Password is required!</span>
+                  <span class="block float-right"  *ngIf="pass.errors?.pattern">Password must contain atleast one number,one upper and lowercase letter and atleast 8 characters!</span>
+          </div>
+
+          <div class="col-sm-12 col-md-6"> 
+                <input type="password" id="confirmPassword"  style="color:black"  class="form-control" name="re-pass"  [(ngModel)]="confirmPassword" #repass="ngModel" [class.has-error]="repass.invalid && repass.touched"  required>
+                <label>Confirm Password</label>
+                <span class="block float-right"  *ngIf="repass.errors?.required && repass.touched ">confirm password is required!</span>
+                <span class="block float-right"  *ngIf="password!=confirmPassword"> password do not match!</span>
+          </div>
+
+    </div>
+
+      
+          <br>
+
+          <select [(ngModel)]="country" #Country="ngModel"  style="color:black"   name="countryName" class="form-control  input-box" placeholder="select country"
+          id="inputCountry" (change)="onChange()" required>
+          <option value="" >Select</option>
+          <option *ngFor="let country of finalCountryList" [value]="country.key">{{country.value}}</option>
+          </select>
+          <span style="color:white">**Country name is required</span>
+          <br>
+          <br>
+
+          <div class="input-group">
+                <div class="input-group-text" style="background:transparent;color:black"><span style="color:white">+{{code}}</span></div>
+                <input type="number" #mobileNum="ngModel"  style="color:black"  pattern="^\d{10}$" id="inputMobile" class="form-control input-box" name="mobile" [(ngModel)]="mobileNumber" #mob="ngModel" [class.has-error]="mob.invalid && mob.touched"
+                 placeholder="Mobile no." required>
+                 
+              </div>
+                
+
+                <span class="block float-right" *ngIf="mob.errors?.required && mob.touched">
+                  Mobile Number is required!
+                </span>
+
+                <span class="block float-right" *ngIf="mob.errors?.pattern">
+                  Mobile Number should only start contain only 10 digits!
+          
+                </span>
+    
+         
+        <br>
+        <br>
+            
+        
+         
+          <button class="btn btn-lg btn-dark btn-block" type="button" (click)="signupFunction()" [disabled]="!registerForm.valid">Sign in</button>
+          <br>
+          <br>
+      </form>
+          
+          <a  [routerLink]="['/login']"  style="color:white" ><b>Sign in Instead</b></a>
+      
+        </div>
+      
+        <div class="col-sm-2"></div>
+</div>
+
+</div> 

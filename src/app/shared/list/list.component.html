@@ -1,0 +1,327 @@
+
+<ng-template #modalContent let-close="close">
+  <div class="modal-header">
+    <h3 class="modal-title" style="color:#7d7d7d;font-weight:bold">{{modalData.eventData.action}}</h3>
+    <button type="button" class="close" (click)="close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-12">
+
+        <div class="card">
+          <div class="card-body">
+
+            <div class="row">
+              <div class="col-4">
+                <h6 style="color:#E27D60;font-weight:bold">  Name </h6>
+              </div>
+              <div class="col-8">
+                <h6 class="card-title" style="color:#7d7d7d;font-weight:bold" >{{modalData.eventData.name}} </h6>
+              </div>
+            </div>
+           <br>
+            <div class="row ">
+              <div class="col-4">
+                <h6 style="color:#E27D60;font-weight:bold"> Created By </h6>
+              </div>
+              <div class="col-8">
+                <h6 class="card-title" style="color:#7d7d7d;font-weight:bold">{{modalData.eventData.creatorName}}</h6>
+              </div>
+            </div>
+           <br>
+            <div class="row">
+              <div class="col-4">
+                <h6 style="color:#E27D60;font-weight:bold"> Created On </h6>
+              </div>
+              <div class="col-8">
+                <h6 class="card-title" style="color:#7d7d7d;font-weight:bold">{{modalData.eventData.createdOn | date: 'medium' }}</h6>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-4">
+                <h6 style="color:#E27D60;font-weight:bold">Last Modified By</h6>
+              </div>
+              <div class="col-8">
+                <h6 class="card-title" style="color:#7d7d7d;font-weight:bold">{{modalData.eventData.modifierName }} </h6>
+              </div>
+            </div>
+            <br>
+            <div class="row ">
+              <div class="col-4">
+                <h6 style="color:#E27D60;font-weight:bold">Last Modified On </h6>
+              </div>
+              <div class="col-8">
+                <h6 class="card-title" style="color:#7d7d7d;font-weight:bold">{{modalData.eventData.modifiedOn | date: 'medium'}} </h6>
+              </div>
+            </div>
+            <br>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<mat-sidenav-container class="list-container">
+  <!-- Start Side nav-->
+  <mat-sidenav #drawerList opened mode="push" class="list-sidenav border ">
+    <br>
+
+    <div >
+      <h4 class="text-center" style="color:#7d7d7d"> <b>Your List</b>  <a style="float:right" (click)="drawerList.toggle()"  matTooltip="Hide me!"><i class="fas fa-times" style="margin-right:19px"></i></a></h4>
+     
+    </div>
+
+    <div>
+      <ul class="nav flex-column">
+        <li class="nav-item">
+          <a class="nav-link" *ngIf="other">
+              <form id="list" class="form-horizontal" role="form">
+            <mat-form-field>
+              <mat-label>List Name</mat-label>
+              <input matInput placeholder="Enter List Name" [(ngModel)]="listName" #lstName="ngModel" [(ngModel)]="enteredListName" name="enteredListName"
+                (keydown)="addListUsingKeypress($event)" required>
+              <mat-error *ngIf="lstName.errors?.required">You must enter a value</mat-error>
+
+            </mat-form-field>
+            <button class="btn btn-primary btn-sm button1" (click)="addListFunction()">CREATE</button>
+          </form>
+          </a>
+        
+        </li>
+
+
+        <li class="nav-item" matTooltip="Add a new List">
+          <a class="nav-link" (click)="enableListBox()">
+            <i class="fas fa-plus"></i> <span style="color:#7d7d7d;margin-left:5px"><b>New List</b></span>
+          </a>
+        </li>
+
+      </ul>
+
+
+      <ul class="nav flex-column" *ngFor="let list of allLists">
+
+        <li class="nav-item" matTooltip="Select to add items into it">
+          <a class="nav-link" (click)="getItemsOfList(list);drawerList.toggle()">
+            <span> <i class="fas fa-list-ul"></i> &nbsp; <span style="color:#7d7d7d"><b>{{list.listName}}</b></span>  </span>
+          </a>
+        </li>
+
+      </ul>
+
+    </div>
+
+
+  </mat-sidenav> <!-- end Side nav-->
+
+  <!-- Start Side nav content-->
+  <mat-sidenav-content class="list-sidenav-content border box-1">
+    <div class="container-fluid">
+
+      <div class="row box">
+        <div class="col-2">
+          <a (click)="drawerList.toggle()" matTooltip="Toggle List Section">
+            <i class="fas fa-bars" style="margin-top:10px;margin-bottom:6px"></i>
+          </a>
+        </div>
+
+        <div class="col-8" >
+          <span contenteditable="true" style="color:#7d7d7d;font-weight:bold" [textContent]="selectedListName" (keydown)="updateListUsingKeypress($event)"
+            (blur)="selectedListName=$event.target.textContent;updateListName()" matTooltip="Click to Edit Me">
+                 {{selectedListName}}
+          </span>
+
+          &nbsp;&nbsp;
+
+          <span *ngIf="itemsCount > 0" matTooltip="Total work done">
+            <span class="badge badge-pill badge-success" *ngIf="itemsDoneCount == itemsCount ">
+              {{itemsDoneCount}} / {{itemsCount}}
+            </span>
+
+            <span class="badge badge-pill badge-danger" *ngIf="itemsDoneCount < itemsCount ">
+              {{itemsDoneCount}} / {{itemsCount}}
+            </span>
+
+          </span>
+        </div>
+
+        <div class="col-2">
+          <div *ngIf="selectedListName">
+
+            <div class="dropdown">
+
+              <a class="btn btn-ligh" id="dropdownList" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" matTooltip="Options related to List">
+                <i class="fas fa-ellipsis-v"></i>
+              </a>
+
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownList">
+                <span *ngIf="listCreatorId == userId">
+                  <a class="dropdown-item" *ngIf="selectedListMode == 'private'" (click)="selectedListMode = 'public';updateListMode()">
+                    <i class="fas fa-eye"></i> &nbsp;
+                    <span  style="color:#7d7d7d;font-weight:bold">Make it Public</span>
+                  </a>
+  
+                  <a class="dropdown-item" *ngIf="selectedListMode == 'public'" (click)="selectedListMode = 'private';updateListMode()">
+                    <i class="fas fa-eye-slash"></i> &nbsp;
+                    <span  style="color:#7d7d7d;font-weight:bold">Make it Private</span>
+                  </a>
+                    
+                </span>
+
+                <a class="dropdown-item" (click)="getListDetailsFunction()" matTooltip="View details like creator name etc.. ">
+                  <i class="fas fa-info-circle"></i> &nbsp;
+                  <span  style="color:#7d7d7d;font-weight:bold">View Details</span>
+                </a>
+
+                <a class="dropdown-item" (click)="deleteListFunction()" matTooltip="Be carefull..You will not be able to do undo of this action">
+                  <i class="fas fa-trash "></i> &nbsp;
+                  <span  style="color:#7d7d7d;font-weight:bold"> Delete List</span>
+                </a>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" *ngIf="selectedListName" style="margin-top:2vh">
+        <div class="col-md-12">
+
+          <div *ngFor="let item of allItems">
+            <div class="taskList">
+
+              <div id="item">
+
+                <span matTooltip="Click to mark as done">
+                  <i class="far fa-check-circle" *ngIf="item.itemDone == 'no'" (click)="markAsDoneUndone(item.itemId,item.itemName,'yes')"></i>
+                  <i class="fas fa-check-circle markDone" *ngIf="item.itemDone == 'yes'" (click)="markAsDoneUndone(item.itemId,item.itemName,'no')"></i>
+                </span>
+
+
+                <span [ngClass]="{'strikethrough':item.itemDone === 'yes'}">
+                 <span style="color:#7d7d7d;font-weight:bold;margin-left:7px">{{item.itemName}}</span> 
+                </span>
+
+                <span class="dropdown">
+                  <a class="btn btn-link" id="dropdownTask" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" matTooltip="Options related to Item">
+                    <i class="fas fa-ellipsis-h"></i>
+                  </a>
+
+                  <span class="dropdown-menu" aria-labelledby="dropdownTask">
+
+                    <a class="dropdown-item" (click)="openDialogToupdateTaskName(item.itemId,item.itemName,item.itemDone)" matTooltip="Update Task Name">
+                      <i class="fas fa-edit"></i> &nbsp;
+                      <span style="color:#7d7d7d;font-weight:bold">Edit Task Name</span>
+                    </a>
+
+                    <a class="dropdown-item" (click)="selectedItemId=item.itemId;openDialogToAddSubItem();" matTooltip="Add a new sub item into it">
+                      <i class="fas fa-plus"></i> &nbsp;
+                      <span style="color:#7d7d7d;font-weight:bold">Add Sub Task</span>
+                    </a>
+
+                    <a class="dropdown-item" (click)="getItemDetailsFunction(item.itemId)" matTooltip="View details of item like creator name etc...">
+                      <i class="fas fa-info-circle"></i> &nbsp;
+                      <span style="color:#7d7d7d;font-weight:bold">View Details</span>
+
+                    </a>
+
+                    <a class="dropdown-item" (click)="deleteItemFunction(item.itemId)" matTooltip="Are you sure?">
+                      <i class="fas fa-trash"></i> &nbsp;
+                      <span style="color:#7d7d7d;font-weight:bold">Delete Item</span>
+
+                    </a>
+                  </span>
+                </span>
+
+              </div>
+
+              <hr>
+
+              <div *ngFor="let subitem of item.subItems">
+                <div class="taskList">
+                  <div id="subitem" style="display:inline-flex">
+
+                    <span>
+                      <i class="far fa-check-circle" *ngIf="subitem.subItemDone == 'no'" (click)="markSubTaskAsDoneUndone(item.itemId,subitem.subItemId,subitem.subItemName,'yes')"></i>
+                      <i class="fas fa-check-circle markDone" *ngIf="subitem.subItemDone == 'yes'" (click)="markSubTaskAsDoneUndone(item.itemId,subitem.subItemId,subitem.subItemName,'no')"></i>
+                    </span>
+                    &nbsp; &nbsp;
+                    <span [ngClass]="{'strikethrough':subitem.subItemDone === 'yes'}">
+                      <p style="color:#7d7d7d;font-weight:bold" > {{subitem.subItemName}} </p>
+                    </span>
+
+                    <span class="dropdown">
+                      <a class="btn btn-link" id="dropdownSubTask" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false" matTooltip="Options related to Sub Item">
+                        <i class="fas fa-ellipsis-h"></i>
+                      </a>
+
+                      <span class="dropdown-menu" aria-labelledby="dropdownSubTask">
+
+                        <a class="dropdown-item" (click)="openDialogToupdateSubTaskName(item.itemId,subitem.subItemId,subitem.subItemName,subitem.subItemDone)">
+                          <i class="fas fa-edit"></i> &nbsp;
+
+                          <span>Edit Sub Task Name</span>
+                        </a>
+
+                        <a class="dropdown-item" (click)="getSubItemDetailsFunction(item.itemId,subitem.subItemId)">
+                          <i class="fas fa-info-circle"></i> &nbsp;
+                          <span>View Details</span>
+
+                        </a>
+
+                        <a class="dropdown-item" (click)="deleteSubItemFunction(item.itemId,subitem.subItemId)">
+                          <i class="fas fa-trash"></i> &nbsp;
+                          <span>Delete Sub Item</span>
+
+                        </a>
+                      </span>
+                    </span>
+
+                  </div>
+                  <hr>
+                </div>
+
+              </div>
+
+
+            </div>
+
+          </div>
+
+          <!-- start add task-->
+          <mat-list>
+
+            <mat-list-item (click)="enableAddTaskBoxFunction()" *ngIf="enableAddTaskBox">
+              <div style="display:inline-flex" matTooltip="Add new item in your Todo">
+                <i class="fas fa-plus"></i>
+                &nbsp;
+                <h4 mat-line> Add a Task </h4>
+              </div>
+            </mat-list-item>
+
+            <mat-list-item *ngIf="taskBox">
+              <mat-form-field>
+                <mat-label>Task Name</mat-label>
+                <input matInput #tskName="ngModel" [(ngModel)]="enteredTaskName" name="enteredTaskName" (keydown)="addTaskUsingKeypress($event)"
+                  required>
+
+              </mat-form-field>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+
+          </mat-list>
+          <!-- end add task-->
+
+        </div>
+      </div>
+
+
+    </div>
+
+  </mat-sidenav-content> <!-- end Side nav content-->
+</mat-sidenav-container>

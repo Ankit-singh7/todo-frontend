@@ -1,0 +1,145 @@
+
+body, html {
+    height: 100%;
+  }
+  
+.container-fluid{
+
+    background-image:url(../../../assets/images/back.jpg);
+    height: 100vh; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+
+}
+
+.heading
+{
+    padding-top:18px;
+    
+    color:white;
+}
+
+.icon
+{
+    margin-right:5px;
+
+}
+
+.form-signin-heading{
+
+    color:white;
+    font-size:30px;
+
+}
+
+button{
+    margin-top:8px;
+    border-radius:15px;
+}
+
+.form-div{
+    box-shadow: 0 4px 16px 4px #2b2b2b;
+}
+
+.has-error{
+
+    border:2px solid #8e1600;
+}
+.block{
+    color:#8e1600;
+    
+    position:relative;
+
+}
+
+
+input{
+    background:transparent
+}
+
+
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color:white;
+    opacity: 1; /* Firefox */
+  }
+  
+  :-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color:white;
+  }
+  
+  ::-ms-input-placeholder { /* Microsoft Edge */
+    color:white;
+  }
+
+  /* LABEL ======================================= */
+label                {
+    color:white; 
+    font-size:18px;
+    font-weight:normal;
+    position:relative;
+    pointer-events:none;
+    left:9px;
+    top:-35px;
+    transition:0.2s ease all; 
+    -moz-transition:0.2s ease all; 
+    -webkit-transition:0.2s ease all;
+  }
+  
+  /* active state */
+  input:focus ~ label, input:valid ~ label        {
+    left:7px;
+    top:-65px;
+    font-size:14px;
+    color:white;
+  }
+  
+
+
+/* HIGHLIGHTER ================================== */
+.highlight {
+  position:absolute;
+  height:60%; 
+  width:100px; 
+  top:25%; 
+  left:0;
+  pointer-events:none;
+  opacity:0.5;
+}
+
+/* active state */
+input:focus ~ .highlight {
+  -webkit-animation:inputHighlighter 0.3s ease;
+  -moz-animation:inputHighlighter 0.3s ease;
+  animation:inputHighlighter 0.3s ease;
+}
+
+/* ANIMATIONS ================ */
+@-webkit-keyframes inputHighlighter {
+    from { background:#5264AE; }
+  to    { width:0; background:transparent; }
+}
+@-moz-keyframes inputHighlighter {
+    from { background:#5264AE; }
+  to    { width:0; background:transparent; }
+}
+@keyframes inputHighlighter {
+    from { background:#5264AE; }
+  to    { width:0; background:transparent; }
+}
+
+
+@media (max-width:767px){
+
+ 
+
+    #confirmPassword{
+
+        margin-top:24px;
+
+    }
+
+
+}

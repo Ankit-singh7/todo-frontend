@@ -1,0 +1,51 @@
+
+<div class="container-fluid">
+
+        <div class="row">
+            <div class="col-12  text-left ">
+               <h4 class="heading animated fadeInLeft "><i class="fab fa-audible icon"></i><span>Trego</span></h4>
+            </div>
+        </div>
+        <br><br>
+    
+        <div class="row p-0 m-0">
+    
+            <div class="col-sm"></div>
+          
+            <div class="col-sm p-5 form-div animated bounceInDown " >
+    
+    
+          
+                    <div class="text-center heading"><h2>Request Password!</h2></div>
+                    <div class="text-center heading">
+                    <p>Please provide your email and we'll send a link to set up a new password.</p>
+                    </div>
+              <br>
+          
+      <form id="loginform" class="form-horizontal" role="form" #forgotForm="ngForm">
+      
+          
+        <div class="form-group">
+      
+            <input type="email" id="inputEmail" style="color:black" [class.has-error]="mail.invalid && mail.touched "  class="form-control" name="email" [(ngModel)]="email" #mail="ngModel" required >
+            
+            <label  >Email</label>
+            
+            <span class=" block float-right" *ngIf="mail.errors?.required && mail.touched">Email is required!</span>
+    
+          </div>
+    
+          
+            
+            <button class="btn btn-lg btn-dark btn-block" type="button" (click)="forgotPasswordFunction()" [disabled]="!forgotForm.valid">Sign in</button>
+     </form>
+           <br>
+           <br>
+            <a  [routerLink]="['/login']"  style="color:white" ><b>Sign in instead</b></a>
+          </div>
+          
+            <div class="col-sm"></div>
+    </div>
+    
+    </div> 
+    

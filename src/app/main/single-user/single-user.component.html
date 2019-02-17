@@ -1,0 +1,16 @@
+<app-own-navbar [active]="'own'"></app-own-navbar>
+<br>
+<div class="container-fluid">
+  <div class="row box">
+    <div class="col-12">
+      <h5 style="color:#7d7d7d"> Hello, <b>{{userName}}</b></h5>
+    </div>
+  </div>
+  
+
+  <div class="row">
+    <div class="col-lg-12">
+      <app-list [allLists]="allLists" [userMode]="'private'" (notify)="getUpdatesFromContainer()"></app-list>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+.list-container {
+    height: 90vh;
+    width:100%;
+    background-color: #ffffff;
+}
+
+.friend-sidenav {
+  width: 100%;
+  background-color: #F4F4F4;
+}
+
+.box{
+  box-shadow: 0 4px 8px 0 #48CDC8, 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
