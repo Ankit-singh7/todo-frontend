@@ -1,6 +1,6 @@
-Real Time TODO List Frontend
+<h1>Real Time TODO List Frontend</h1>
 
-It contains following features-
+<h3>It contains following features-</h3>
 
 1)Login and Signup 
 
